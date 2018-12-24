@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 565371518}
   - component: {fileID: 565371517}
+  - component: {fileID: 565371519}
   m_Layer: 0
   m_Name: Maze Generator
   m_TagString: Untagged
@@ -143,9 +144,11 @@ MonoBehaviour:
   mazeRows: 10
   mazeColumns: 10
   mazeCanvas: {fileID: 1757623117}
+  delay: 0
   cellPrefab: {fileID: 1462508249115054, guid: 95b6390666de1c94b818fe80f137904b, type: 2}
-  cellWidth: 0
-  cellHeight: 0
+  algoritmScripts:
+  - {fileID: 565371519}
+  chosenAlgorithm: 0
 --- !u!4 &565371518
 Transform:
   m_ObjectHideFlags: 0
@@ -159,6 +162,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &565371519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 565371516}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d5eab0d2c063894ca12635531b6d0a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &650229579
 GameObject:
   m_ObjectHideFlags: 0

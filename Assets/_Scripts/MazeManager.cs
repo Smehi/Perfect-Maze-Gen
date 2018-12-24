@@ -9,6 +9,7 @@ public class MazeManager : MonoBehaviour
     [SerializeField] private int mazeRows;
     [SerializeField] private int mazeColumns;
     [SerializeField] private GameObject mazeCanvas;
+    [Range(0, 1)] [SerializeField] private float delay;
 
     [Header("Cell properties")]
     [SerializeField] private GameObject cellPrefab;
@@ -75,7 +76,13 @@ public class MazeManager : MonoBehaviour
                 cell.transform.localScale = new Vector2(cellWidth, cellHeight);
                 cell.name = "Cell: " + ((x + (y * mazeRows)) + 1);
 
-                mazeCells.Add(cell, cell.GetComponent<Cell>());
+                // Set the index of the cell
+                Cell cellScript = cell.GetComponent<Cell>();
+                cellScript.Position = new Vector2(x, y);
+                cellScript.MazeRows = mazeRows;
+                cellScript.MazeColumns = mazeColumns;
+
+                mazeCells.Add(cell, cellScript);
             }
         }
     }
@@ -95,5 +102,10 @@ public class MazeManager : MonoBehaviour
     public Dictionary<GameObject, Cell> MazeCells
     {
         get { return mazeCells; }
+    }
+
+    public float Delay
+    {
+        get { return delay; }
     }
 }
