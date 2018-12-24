@@ -40,17 +40,27 @@ public class BackTracker : MonoBehaviour
 
     private IEnumerator SolveMaze(float delay)
     {
+        // Step 1
         currentCell = canvas.GetChild(Random.Range(0, canvas.childCount)).gameObject;
+        cells[currentCell].IsVisited = true;
 
+        // Step 2
         while (unVisited.Count > 0)
         {
-            cells[currentCell].IsVisited = true;
+            // Step 2.1
+            var nextCell = cells[currentCell].GetNeighbour();
 
-            var next = cells[currentCell].GetNeighbour();
-            if (next)
+            if (nextCell)
             {
-                cells[next].IsVisited = true;
-                currentCell = next;
+                cells[nextCell].IsVisited = true;
+
+                // Step 2.2
+
+                // Step 2.3
+                RemoveWalls(cells[currentCell], cells[nextCell]);
+
+                // Step 2.4
+                currentCell = nextCell;
             }
 
             //unVisited.Remove(currentCell);
@@ -63,6 +73,39 @@ public class BackTracker : MonoBehaviour
             {
                 yield return null;
             }
+        }
+    }
+
+    private void RemoveWalls(Cell cell1, Cell cell2)
+    {
+        int x = (int)(cell1.Position.x - cell2.Position.x);
+        switch (x)
+        {
+            case -1:
+                cell1.RemoveWall(Cell.CellWalls.RightWall);
+                cell2.RemoveWall(Cell.CellWalls.LeftWall);
+                break;
+            case 1:
+                cell1.RemoveWall(Cell.CellWalls.LeftWall);
+                cell2.RemoveWall(Cell.CellWalls.RightWall);
+                break;
+            default:
+                break;
+        }
+
+        var y = (int)(cell1.Position.y - cell2.Position.y);
+        switch (y)
+        {
+            case -1:
+                cell1.RemoveWall(Cell.CellWalls.TopWall);
+                cell2.RemoveWall(Cell.CellWalls.BottomWall);
+                break;
+            case 1:
+                cell1.RemoveWall(Cell.CellWalls.BottomWall);
+                cell2.RemoveWall(Cell.CellWalls.TopWall);
+                break;
+            default:
+                break;
         }
     }
 }

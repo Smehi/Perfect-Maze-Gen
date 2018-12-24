@@ -17,7 +17,6 @@ public class Cell : MonoBehaviour
 
     // This will keep a reference to the walls that have been set in the editor
     [SerializeField] private GameObject[] walls;
-    private bool[] wallState = new bool[] { true, true, true, true };
     private bool isVisited;
 
     // Removes a wall with the help of the enum
@@ -26,57 +25,24 @@ public class Cell : MonoBehaviour
         switch (wall)
         {
             case CellWalls.TopWall:
-                if (GetWallState(wall))
-                {
-                    walls[0].SetActive(false);
-                    wallState[0] = false;
-                }
+                walls[0].SetActive(false);
                 break;
             case CellWalls.RightWall:
-                if (GetWallState(wall))
-                {
-                    walls[1].SetActive(false);
-                    wallState[1] = false;
-                }
+                walls[1].SetActive(false);
                 break;
             case CellWalls.BottomWall:
-                if (GetWallState(wall))
-                {
-                    walls[2].SetActive(false);
-                    wallState[2] = false;
-                }
+                walls[2].SetActive(false);
                 break;
             case CellWalls.LeftWall:
-                if (GetWallState(wall))
-                {
-                    walls[3].SetActive(false);
-                    wallState[3] = false;
-                }
+                walls[3].SetActive(false);
                 break;
         }
     }
-
-    public bool GetWallState(CellWalls wall)
-    {
-        switch (wall)
-        {
-            case CellWalls.TopWall:
-                return wallState[0];
-            case CellWalls.RightWall:
-                return wallState[1];
-            case CellWalls.BottomWall:
-                return wallState[2];
-            case CellWalls.LeftWall:
-                return wallState[3];
-        }
-
-        return false;
-    }
-
+    
     public GameObject GetNeighbour()
     {
         List<GameObject> neighbours = new List<GameObject>();
-        
+
         Cell top = GetIndex(Position.x, Position.y + 1) != -1 ? MazeCells[GetIndex(Position.x, Position.y + 1)] : null;
         Cell right = GetIndex(Position.x + 1, Position.y) != -1 ? MazeCells[GetIndex(Position.x + 1, Position.y)] : null;
         Cell bottom = GetIndex(Position.x, Position.y - 1) != -1 ? MazeCells[GetIndex(Position.x, Position.y - 1)] : null;
@@ -131,7 +97,7 @@ public class Cell : MonoBehaviour
         set
         {
             isVisited = value;
-            GetComponent<Image>().color = Color.cyan;
+            GetComponent<Image>().color = Color.blue;
         }
     }
 
