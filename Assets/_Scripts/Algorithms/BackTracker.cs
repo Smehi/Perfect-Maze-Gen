@@ -10,6 +10,7 @@ public class BackTracker : MonoBehaviour
     private GameObject currentCell;
     private Dictionary<GameObject, Cell> cells = new Dictionary<GameObject, Cell>();
     private List<GameObject> unVisited = new List<GameObject>();
+    private List<GameObject> stack = new List<GameObject>();
 
     // Use this for initialization
     void Start()
@@ -48,7 +49,7 @@ public class BackTracker : MonoBehaviour
         while (unVisited.Count > 0)
         {
             cells[currentCell].StopHighlightCell();
-         
+
             // Step 2.1
             var nextCell = cells[currentCell].GetNeighbour();
 
@@ -57,6 +58,7 @@ public class BackTracker : MonoBehaviour
                 cells[nextCell].IsVisited = true;
 
                 // Step 2.2
+                stack.Add(currentCell);
 
                 // Step 2.3
                 RemoveWalls(cells[currentCell], cells[nextCell]);
@@ -64,8 +66,14 @@ public class BackTracker : MonoBehaviour
                 // Step 2.4
                 currentCell = nextCell;
             }
+            else if (stack.Count > 0)
+            {
+                currentCell = stack[stack.Count - 1];
+                cells[currentCell].IsVisited = true;
+                stack.RemoveAt(stack.Count - 1);
+            }
 
-            //unVisited.Remove(currentCell);
+            unVisited.Remove(currentCell);
 
             if (delay > 0)
             {
