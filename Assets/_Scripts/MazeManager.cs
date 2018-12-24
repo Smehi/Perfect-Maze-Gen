@@ -12,15 +12,25 @@ public class MazeManager : MonoBehaviour
 
     [Header("Cell properties")]
     [SerializeField] private GameObject cellPrefab;
-    [SerializeField] private Dictionary<GameObject, Cell> mazeCells = new Dictionary<GameObject, Cell>();
+    private Dictionary<GameObject, Cell> mazeCells = new Dictionary<GameObject, Cell>();
     private float cellWidth;
     private float cellHeight;
+
+    [Header("Algorithm")]
+    [SerializeField] private Behaviour[] algoritmScripts;
+    [SerializeField] private Dictionary<ChosenAlgorithm, Behaviour> algorithms = new Dictionary<ChosenAlgorithm, Behaviour>();
+    [SerializeField] private ChosenAlgorithm chosenAlgorithm;
+    private enum ChosenAlgorithm
+    {
+        BackTracker
+    }
 
     // Use this for initialization
     void Start()
     {
         InitVars();
-        CreateGrid();
+        GenerateGrid();
+        GenerateMaze(chosenAlgorithm);
     }
 
     private void InitVars()
@@ -37,9 +47,15 @@ public class MazeManager : MonoBehaviour
 
         // Empty the cells list for repopulation
         mazeCells.Clear();
+
+        // Populate the algorithms dictionary
+        for (int i = 0; i < algoritmScripts.Length; i++)
+        {
+            algorithms[(ChosenAlgorithm)i] = algoritmScripts[i];
+        }
     }
 
-    private void CreateGrid()
+    private void GenerateGrid()
     {
         Vector2 spawnPos = Vector2.zero;
 
@@ -62,5 +78,22 @@ public class MazeManager : MonoBehaviour
                 mazeCells.Add(cell, cell.GetComponent<Cell>());
             }
         }
+    }
+
+    private void GenerateMaze(ChosenAlgorithm chosen)
+    {
+        // Disable all algorithms
+        for (int i = 0; i < algoritmScripts.Length; i++)
+        {
+            algorithms[(ChosenAlgorithm)i].enabled = false;
+        }
+
+        // Enable the chosen algorithm
+        algorithms[chosen].enabled = true;
+    }
+
+    public Dictionary<GameObject, Cell> MazeCells
+    {
+        get { return mazeCells; }
     }
 }
