@@ -22,20 +22,27 @@ public class BackTracker : MonoBehaviour
 
         canvas = GameObject.Find("Canvas").transform;
 
+        // Add all the cells to the unvisited list to loop through when making the maze
         foreach (KeyValuePair<GameObject, Cell> pair in cells)
         {
             unVisited.Add(cells[pair.Key].gameObject);
 
+            // Make a new dictionary that stores a int and Cell script.
+            // The int will represent the ID of the cell that is stored in the script so checking for neighbours is easier.
+            // Your fps will tank because of this, but I couldn't figure out a more efficient way at the time.
             Dictionary<int, Cell> newDic = new Dictionary<int, Cell>();
 
+            // Populate the new dictionary
             foreach (KeyValuePair<GameObject, Cell> pair2 in cells)
             {
                 newDic.Add(cells[pair2.Key].GetIndex(cells[pair2.Key].Position.x, cells[pair2.Key].Position.y), cells[pair2.Key]);
             }
 
+            // Add the dictionary to the cell
             cells[pair.Key].MazeCells = newDic;
         }
 
+        // Start generating the maze
         StartCoroutine(SolveMaze(delay));
     }
 
@@ -88,6 +95,7 @@ public class BackTracker : MonoBehaviour
 
     private void RemoveWalls(Cell cell1, Cell cell2)
     {
+        // Check whether cell1 is on the left or right side and remove walls accordingly
         int x = (int)(cell1.Position.x - cell2.Position.x);
         switch (x)
         {
@@ -103,6 +111,7 @@ public class BackTracker : MonoBehaviour
                 break;
         }
 
+        // Check whether cell1 is on the top or bottom and remove walls accordingly
         var y = (int)(cell1.Position.y - cell2.Position.y);
         switch (y)
         {

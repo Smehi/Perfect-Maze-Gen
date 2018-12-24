@@ -43,11 +43,13 @@ public class Cell : MonoBehaviour
     {
         List<GameObject> neighbours = new List<GameObject>();
 
+        // Check if the position is available first and then add it
         Cell top = GetIndex(Position.x, Position.y + 1) != -1 ? MazeCells[GetIndex(Position.x, Position.y + 1)] : null;
         Cell right = GetIndex(Position.x + 1, Position.y) != -1 ? MazeCells[GetIndex(Position.x + 1, Position.y)] : null;
         Cell bottom = GetIndex(Position.x, Position.y - 1) != -1 ? MazeCells[GetIndex(Position.x, Position.y - 1)] : null;
         Cell left = GetIndex(Position.x - 1, Position.y) != -1 ? MazeCells[GetIndex(Position.x - 1, Position.y)] : null;
 
+        // If the neighbours are available and not visited add them to our neighbours list
         if (top && !top.IsVisited)
         {
             neighbours.Add(top.gameObject);
@@ -68,6 +70,7 @@ public class Cell : MonoBehaviour
             neighbours.Add(left.gameObject);
         }
 
+        // Choose one at random if we have neighbours
         if (neighbours.Count > 0)
         {
             return neighbours[Random.Range(0, neighbours.Count)];
@@ -78,6 +81,7 @@ public class Cell : MonoBehaviour
         }
     }
 
+    // Get the index of a neighbour that is some position away from you
     public int GetIndex(float x, float y)
     {
         if (x < 0 || y < 0 || x > MazeColumns - 1 || y > MazeRows - 1)

@@ -58,8 +58,6 @@ public class MazeManager : MonoBehaviour
 
     private void GenerateGrid()
     {
-        Vector2 spawnPos = Vector2.zero;
-
         // Nested for-loop to fill the screen with cells
         for (int y = 0; y < mazeRows; y++)
         {
