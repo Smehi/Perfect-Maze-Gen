@@ -57,6 +57,7 @@ public class MazeManager : MonoBehaviour
                 // Set the position with a small offset because the pivot point of the cell is in the center
                 cell.transform.position = new Vector2(x * cellWidth + (cellWidth / 2), y * cellHeight + (cellHeight / 2));
                 cell.transform.localScale = new Vector2(cellWidth, cellHeight);
+                cell.name = "Cell: " + ((x + (y * mazeRows)) + 1);
 
                 mazeCells.Add(cell, cell.GetComponent<Cell>());
             }
