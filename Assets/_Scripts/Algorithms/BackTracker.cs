@@ -47,6 +47,8 @@ public class BackTracker : MonoBehaviour
         // Step 2
         while (unVisited.Count > 0)
         {
+            cells[currentCell].StopHighlightCell();
+         
             // Step 2.1
             var nextCell = cells[currentCell].GetNeighbour();
 

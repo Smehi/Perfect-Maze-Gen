@@ -88,6 +88,11 @@ public class Cell : MonoBehaviour
         return (int)(x + (y * MazeRows));
     }
 
+    public void StopHighlightCell()
+    {
+        GetComponent<Image>().color = Color.blue;
+    }
+
     public bool IsVisited
     {
         get
@@ -97,7 +102,7 @@ public class Cell : MonoBehaviour
         set
         {
             isVisited = value;
-            GetComponent<Image>().color = Color.blue;
+            GetComponent<Image>().color = Color.cyan;
         }
     }
 
