@@ -7,7 +7,6 @@ public class BackTracker : MonoBehaviour
 {
     private float delay;
     private MazeManager mazeManager;
-    private Transform canvas;
     private GameObject currentCell;
     private Dictionary<GameObject, Cell> cells = new Dictionary<GameObject, Cell>();
     private List<GameObject> unVisited = new List<GameObject>();
@@ -20,7 +19,6 @@ public class BackTracker : MonoBehaviour
         // Reset all the values
         delay = 0;
         mazeManager = null;
-        canvas = null;
         currentCell = null;
         cells = new Dictionary<GameObject, Cell>();
         unVisited = new List<GameObject>();
@@ -30,27 +28,14 @@ public class BackTracker : MonoBehaviour
 
         delay = mazeManager.Delay;
         cells = mazeManager.MazeCells;
-
-        canvas = GameObject.Find("Canvas").transform;
-
-        // Add all the cells to the unvisited list to loop through when making the maze
+        
         foreach (KeyValuePair<GameObject, Cell> pair in cells)
         {
+            // We need to add all the cells into the unvisted list to loop through
             unVisited.Add(cells[pair.Key].gameObject);
 
-            // Make a new dictionary that stores a int and Cell script.
-            // The int will represent the ID of the cell that is stored in the script so checking for neighbours is easier.
-            // Your fps will tank because of this, but I couldn't figure out a more efficient way at the time.
-            Dictionary<int, Cell> newDic = new Dictionary<int, Cell>();
-
-            // Populate the new dictionary
-            foreach (KeyValuePair<GameObject, Cell> pair2 in cells)
-            {
-                newDic.Add(cells[pair2.Key].GetIndex(cells[pair2.Key].Position.x, cells[pair2.Key].Position.y), cells[pair2.Key]);
-            }
-
-            // Add the dictionary to the cell
-            cells[pair.Key].MazeCells = newDic;
+            // We also need to inject the dictionary with all the cells into every cell to find neighbours
+            cells[pair.Key].MazeCells = cells;
         }
 
         // Start generating the maze

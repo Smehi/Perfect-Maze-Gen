@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,16 +39,17 @@ public class Cell : MonoBehaviour
                 break;
         }
     }
-    
+
     public GameObject GetNeighbour()
     {
         List<GameObject> neighbours = new List<GameObject>();
 
         // Check if the position is available first and then add it
-        Cell top = GetIndex(Position.x, Position.y + 1) != -1 ? MazeCells[GetIndex(Position.x, Position.y + 1)] : null;
-        Cell right = GetIndex(Position.x + 1, Position.y) != -1 ? MazeCells[GetIndex(Position.x + 1, Position.y)] : null;
-        Cell bottom = GetIndex(Position.x, Position.y - 1) != -1 ? MazeCells[GetIndex(Position.x, Position.y - 1)] : null;
-        Cell left = GetIndex(Position.x - 1, Position.y) != -1 ? MazeCells[GetIndex(Position.x - 1, Position.y)] : null;
+        Cell top = GetIndex(Position.x, Position.y + 1) != -1 ? MazeCells.ElementAt(GetIndex(Position.x, Position.y + 1)).Value : null;
+        Cell right = GetIndex(Position.x + 1, Position.y) != -1 ? MazeCells.ElementAt(GetIndex(Position.x + 1, Position.y)).Value : null;
+        Cell bottom = GetIndex(Position.x, Position.y - 1) != -1 ? MazeCells.ElementAt(GetIndex(Position.x, Position.y - 1)).Value : null;
+        Cell left = GetIndex(Position.x - 1, Position.y) != -1 ? MazeCells.ElementAt(GetIndex(Position.x - 1, Position.y)).Value : null;
+
 
         // If the neighbours are available and not visited add them to our neighbours list
         if (top && !top.IsVisited)
@@ -128,7 +130,7 @@ public class Cell : MonoBehaviour
         set;
     }
 
-    public Dictionary<int, Cell> MazeCells
+    public Dictionary<GameObject, Cell> MazeCells
     {
         get;
         set;
