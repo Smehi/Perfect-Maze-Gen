@@ -19,6 +19,8 @@ public class Cell : MonoBehaviour
     // This will keep a reference to the walls that have been set in the editor
     [SerializeField] private GameObject[] walls;
     private bool isVisited;
+    private Color backgroundColor;
+    private Color wallColor;
 
     // Removes a wall with the help of the enum
     public void RemoveWall(CellWalls wall)
@@ -111,7 +113,49 @@ public class Cell : MonoBehaviour
 
     public void StopHighlightCell()
     {
-        GetComponent<Image>().color = Color.blue;
+        GetComponent<Image>().color = HighlightColor;
+    }
+
+    public Color BackgroundColor
+    {
+        get
+        {
+            return backgroundColor;
+        }
+        set
+        {
+            backgroundColor = value;
+            GetComponent<Image>().color = backgroundColor;
+        }
+    }
+
+    public Color WallColor
+    {
+        get
+        {
+            return wallColor;
+        }
+        set
+        {
+            wallColor = value;
+
+            foreach (GameObject wall in walls)
+            {
+                GetComponent<Image>().color = wallColor; 
+            }
+        }
+    }
+
+    public Color HighlightColor
+    {
+        get;
+        set;
+    }
+
+    public Color VisitedColor
+    {
+        get;
+        set;
     }
 
     public bool IsVisited
@@ -123,7 +167,7 @@ public class Cell : MonoBehaviour
         set
         {
             isVisited = value;
-            GetComponent<Image>().color = Color.cyan;
+            GetComponent<Image>().color = VisitedColor;
         }
     }
 

@@ -19,6 +19,10 @@ public class MazeManager : MonoBehaviour
     [SerializeField] private GameObject cellPrefab;
     private float cellWidth;
     private float cellHeight;
+    private Color cellBackgroundColor;
+    private Color cellWallColor;
+    private Color cellHighlightColor;
+    private Color cellVisitedColor;
 
     [Header("Algorithm")]
     [SerializeField] private Behaviour[] algoritmScripts;
@@ -30,7 +34,7 @@ public class MazeManager : MonoBehaviour
         RandomizedPrims
     }
 
-    [Header("UI")]
+    [Header("UI Variables")]
     [SerializeField] private GameObject userInputCanvas;
     [SerializeField] private Text rowsText;
     [SerializeField] private Slider rowsInput;
@@ -39,6 +43,24 @@ public class MazeManager : MonoBehaviour
     [SerializeField] private Text delayText;
     [SerializeField] private Slider delayInput;
     [SerializeField] private Dropdown dropdownInput;
+
+    [Header("UI Colour")]
+    [SerializeField] private Image backgroundTextImage;
+    [SerializeField] private Slider backgroundRed;
+    [SerializeField] private Slider backgroundGreen;
+    [SerializeField] private Slider backgroundBlue;
+    [SerializeField] private Image wallTextImage;
+    [SerializeField] private Slider wallRed;
+    [SerializeField] private Slider wallGreen;
+    [SerializeField] private Slider wallBlue;
+    [SerializeField] private Image highlightTextImage;
+    [SerializeField] private Slider highlightRed;
+    [SerializeField] private Slider highlightGreen;
+    [SerializeField] private Slider highlightBlue;
+    [SerializeField] private Image visitedTextImage;
+    [SerializeField] private Slider visitedRed;
+    [SerializeField] private Slider visitedGreen;
+    [SerializeField] private Slider visitedBlue;
 
     // Use this for initialization
     public void Generate()
@@ -107,6 +129,12 @@ public class MazeManager : MonoBehaviour
                 cellScript.MazeRows = mazeRows;
                 cellScript.MazeColumns = mazeColumns;
 
+                // Set the cell colors
+                cellScript.BackgroundColor = cellBackgroundColor;
+                cellScript.WallColor = cellWallColor;
+                cellScript.HighlightColor = cellHighlightColor;
+                cellScript.VisitedColor = cellVisitedColor;
+
                 previousCells.Add(cell);
                 mazeCells.Add(cell, cellScript);
             }
@@ -143,6 +171,46 @@ public class MazeManager : MonoBehaviour
     public void SetAlgorithm()
     {
         chosenAlgorithm = (ChosenAlgorithm)dropdownInput.value;
+    }
+
+    public void SetBackgroundColor()
+    {
+        var r = backgroundRed.value;
+        var g = backgroundGreen.value;
+        var b = backgroundBlue.value;
+
+        Color color = new Color(r, g, b);
+        backgroundTextImage.color = color;
+    }
+
+    public void SetWallColor()
+    {
+        var r = wallRed.value;
+        var g = wallGreen.value;
+        var b = wallBlue.value;
+
+        Color color = new Color(r, g, b);
+        wallTextImage.color = color;
+    }
+
+    public void SetHighlightColor()
+    {
+        var r = highlightRed.value;
+        var g = highlightGreen.value;
+        var b = highlightBlue.value;
+
+        Color color = new Color(r, g, b);
+        highlightTextImage.color = color;
+    }
+
+    public void SetVisitedColor()
+    {
+        var r = visitedRed.value;
+        var g = visitedGreen.value;
+        var b = visitedBlue.value;
+
+        Color color = new Color(r, g, b);
+        visitedTextImage.color = color;
     }
 
     public void SetRows()
