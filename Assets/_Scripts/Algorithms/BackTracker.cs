@@ -94,6 +94,8 @@ public class BackTracker : MonoBehaviour
                 yield return null;
             }
         }
+
+        mazeManager.ShowMenu();
     }
 
     private void RemoveWalls(Cell cell1, Cell cell2)

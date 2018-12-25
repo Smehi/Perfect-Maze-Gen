@@ -2322,6 +2322,10 @@ MonoBehaviour:
   mazeCanvas: {fileID: 1757623117}
   delay: 0
   cellPrefab: {fileID: 1462508249115054, guid: 95b6390666de1c94b818fe80f137904b, type: 2}
+  cellBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  cellWallColor: {r: 0, g: 0, b: 0, a: 1}
+  cellHighlightColor: {r: 0, g: 1, b: 1, a: 1}
+  cellVisitedColor: {r: 0, g: 0, b: 1, a: 1}
   algoritmScripts:
   - {fileID: 565371519}
   - {fileID: 565371520}

@@ -17,12 +17,12 @@ public class MazeManager : MonoBehaviour
 
     [Header("Cell properties")]
     [SerializeField] private GameObject cellPrefab;
+    [SerializeField] private Color cellBackgroundColor;
+    [SerializeField] private Color cellWallColor;
+    [SerializeField] private Color cellHighlightColor;
+    [SerializeField] private Color cellVisitedColor;
     private float cellWidth;
     private float cellHeight;
-    private Vector3 cellBackgroundColor;
-    private Vector3 cellWallColor;
-    private Vector3 cellHighlightColor;
-    private Vector3 cellVisitedColor;
 
     [Header("Algorithm")]
     [SerializeField] private Behaviour[] algoritmScripts;
@@ -96,7 +96,7 @@ public class MazeManager : MonoBehaviour
 
         // Empty the cells list for repopulation
         previousCells.Clear();
-        mazeCells.Clear();
+        MazeCells.Clear();
 
         // Populate the algorithms dictionary
         for (int i = 0; i < algoritmScripts.Length; i++)
@@ -136,7 +136,7 @@ public class MazeManager : MonoBehaviour
                 cellScript.VisitedColor = cellVisitedColor;
 
                 previousCells.Add(cell);
-                mazeCells.Add(cell, cellScript);
+                MazeCells.Add(cell, cellScript);
             }
         }
     }
@@ -168,6 +168,11 @@ public class MazeManager : MonoBehaviour
         }
     }
 
+    public void ShowMenu()
+    {
+        userInputCanvas.SetActive(true);
+    }
+
     public void SetAlgorithm()
     {
         chosenAlgorithm = (ChosenAlgorithm)dropdownInput.value;
@@ -181,7 +186,7 @@ public class MazeManager : MonoBehaviour
 
         Color color = new Color(r, g, b);
         backgroundTextImage.color = color;
-        cellBackgroundColor = new Vector3(color.r, color.g, color.b);
+        cellBackgroundColor = color;
     }
 
     public void SetWallColor()
@@ -192,7 +197,7 @@ public class MazeManager : MonoBehaviour
 
         Color color = new Color(r, g, b);
         wallTextImage.color = color;
-        cellWallColor = new Vector3(color.r, color.g, color.b);
+        cellWallColor = color;
     }
 
     public void SetHighlightColor()
@@ -203,7 +208,7 @@ public class MazeManager : MonoBehaviour
 
         Color color = new Color(r, g, b);
         highlightTextImage.color = color;
-        cellHighlightColor = new Vector3(color.r, color.g, color.b);
+        cellHighlightColor = color;
     }
 
     public void SetVisitedColor()
@@ -214,7 +219,7 @@ public class MazeManager : MonoBehaviour
 
         Color color = new Color(r, g, b);
         visitedTextImage.color = color;
-        cellVisitedColor = new Vector3(color.r, color.g, color.b);
+        cellVisitedColor = color;
     }
 
     public void SetRows()
@@ -247,7 +252,14 @@ public class MazeManager : MonoBehaviour
 
     public Dictionary<GameObject, Cell> MazeCells
     {
-        get { return mazeCells; }
+        get
+        {
+            return mazeCells;
+        }
+        private set
+        {
+            mazeCells = value;
+        }
     }
 
     public float Delay

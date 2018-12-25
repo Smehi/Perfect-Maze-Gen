@@ -115,33 +115,31 @@ public class Cell : MonoBehaviour
 
     public void StopHighlightCell()
     {
-        GetComponent<Image>().color = highlightColor;
+        GetComponent<Image>().color = visitedColor;
     }
 
-    public Vector3 BackgroundColor
+    public Color BackgroundColor
     {
         get
         {
-            return new Vector3(backgroundColor.r, backgroundColor.g, backgroundColor.b);
+            return backgroundColor;
         }
         set
         {
-            backgroundColor = new Color(value.x, value.y, value.z);
+            backgroundColor = value;
             GetComponent<Image>().color = backgroundColor;
-            print("input: " + value);
-            print("output: " + backgroundColor);
         }
     }
 
-    public Vector3 WallColor
+    public Color WallColor
     {
         get
         {
-            return new Vector3(wallColor.r, wallColor.g, wallColor.b);
+            return wallColor;
         }
         set
         {
-            wallColor = new Color(value.x, value.y, value.z);
+            wallColor = value;
 
             foreach (GameObject wall in walls)
             {
@@ -150,27 +148,27 @@ public class Cell : MonoBehaviour
         }
     }
 
-    public Vector3 HighlightColor
+    public Color HighlightColor
     {
         get
         {
-            return new Vector3(highlightColor.r, highlightColor.g, highlightColor.b);
+            return highlightColor;
         }
         set
         {
-            highlightColor = new Color(value.x, value.y, value.z);
+            highlightColor = value;
         }
     }
 
-    public Vector3 VisitedColor
+    public Color VisitedColor
     {
         get
         {
-            return new Vector3(visitedColor.r, visitedColor.g, visitedColor.b);
+            return visitedColor;
         }
         set
         {
-            visitedColor = new Color(value.x, value.y, value.z);
+            visitedColor = value;
         }
     }
 
@@ -183,7 +181,7 @@ public class Cell : MonoBehaviour
         set
         {
             isVisited = value;
-            GetComponent<Image>().color = visitedColor;
+            GetComponent<Image>().color = highlightColor;
         }
     }
 

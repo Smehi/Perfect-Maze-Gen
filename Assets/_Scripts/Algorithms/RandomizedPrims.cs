@@ -159,5 +159,7 @@ public class RandomizedPrims : MonoBehaviour
                 yield return null;
             }
         }
+
+        mazeManager.ShowMenu();
     }
 }
