@@ -26,7 +26,8 @@ public class MazeManager : MonoBehaviour
     [SerializeField] private ChosenAlgorithm chosenAlgorithm;
     private enum ChosenAlgorithm
     {
-        BackTracker
+        BackTracker,
+        RandomizedPrims
     }
 
     [Header("UI")]
@@ -98,7 +99,7 @@ public class MazeManager : MonoBehaviour
                 // Set the position with a small offset because the pivot point of the cell is in the center
                 cell.transform.position = new Vector2(x * cellWidth + (cellWidth / 2), y * cellHeight + (cellHeight / 2));
                 cell.transform.localScale = new Vector2(cellWidth, cellHeight);
-                cell.name = "Cell: " + ((x + (y * mazeColumns)) + 1);
+                cell.name = "Cell: " + (x + (y * mazeColumns));
 
                 // Set the index of the cell
                 Cell cellScript = cell.GetComponent<Cell>();
@@ -128,6 +129,9 @@ public class MazeManager : MonoBehaviour
         {
             case ChosenAlgorithm.BackTracker:
                 GetComponent<BackTracker>().Init();
+                break;
+            case ChosenAlgorithm.RandomizedPrims:
+                GetComponent<RandomizedPrims>().Init();
                 break;
             default:
                 break;

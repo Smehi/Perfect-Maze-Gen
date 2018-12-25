@@ -40,6 +40,21 @@ public class Cell : MonoBehaviour
         }
     }
 
+    public List<GameObject> GetWalls()
+    {
+        List<GameObject> newWalls = new List<GameObject>();
+
+        foreach (GameObject wall in walls)
+        {
+            if (wall.activeSelf)
+            {
+                newWalls.Add(wall);
+            }
+        }
+
+        return newWalls;
+    }
+
     public GameObject GetNeighbour()
     {
         List<GameObject> neighbours = new List<GameObject>();
