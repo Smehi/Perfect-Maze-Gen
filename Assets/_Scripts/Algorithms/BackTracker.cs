@@ -11,10 +11,20 @@ public class BackTracker : MonoBehaviour
     private Dictionary<GameObject, Cell> cells = new Dictionary<GameObject, Cell>();
     private List<GameObject> unVisited = new List<GameObject>();
     private List<GameObject> stack = new List<GameObject>();
+    private IEnumerator currentSolve;
 
     // Use this for initialization
-    void Start()
+    public void Init()
     {
+        // Reset all the values
+        delay = 0;
+        mazeManager = null;
+        canvas = null;
+        currentCell = null;
+        cells = new Dictionary<GameObject, Cell>();
+        unVisited = new List<GameObject>();
+        stack = new List<GameObject>();
+
         mazeManager = GetComponent<MazeManager>();
 
         delay = mazeManager.Delay;
@@ -43,13 +53,20 @@ public class BackTracker : MonoBehaviour
         }
 
         // Start generating the maze
-        StartCoroutine(SolveMaze(delay));
+        if (currentSolve != null)
+        {
+            StopCoroutine(currentSolve);
+        }
+
+        currentSolve = SolveMaze(delay);
+        StartCoroutine(currentSolve);
     }
 
     private IEnumerator SolveMaze(float delay)
     {
         // Step 1
-        currentCell = canvas.GetChild(Random.Range(0, canvas.childCount)).gameObject;
+        print(canvas.childCount);
+        currentCell = canvas.GetChild(Random.Range(1, canvas.childCount)).gameObject;
         cells[currentCell].IsVisited = true;
 
         // Step 2

@@ -89,7 +89,7 @@ public class Cell : MonoBehaviour
             return -1;
         }
 
-        return (int)(x + (y * MazeRows));
+        return (int)(x + (y * MazeColumns));
     }
 
     public void StopHighlightCell()
