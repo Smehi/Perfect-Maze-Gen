@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -65,8 +66,8 @@ public class BackTracker : MonoBehaviour
     private IEnumerator SolveMaze(float delay)
     {
         // Step 1
-        print(canvas.childCount);
-        currentCell = canvas.GetChild(Random.Range(1, canvas.childCount)).gameObject;
+        System.Random rand = new System.Random();
+        currentCell = cells.ElementAt(rand.Next(0, cells.Count)).Key;
         cells[currentCell].IsVisited = true;
 
         // Step 2

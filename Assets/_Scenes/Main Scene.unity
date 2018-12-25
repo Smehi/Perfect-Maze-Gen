@@ -523,8 +523,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52b5c4c37c39c34cb6c755d53d48b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mazeRows: 0
-  mazeColumns: 0
+  mazeRows: 4
+  mazeColumns: 4
   mazeCanvas: {fileID: 1757623117}
   delay: 0
   cellPrefab: {fileID: 1462508249115054, guid: 95b6390666de1c94b818fe80f137904b, type: 2}
