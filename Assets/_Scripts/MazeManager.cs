@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -139,6 +140,10 @@ public class MazeManager : MonoBehaviour
                 MazeCells.Add(cell, cellScript);
             }
         }
+
+        // We do this at the end of generating the maze just so we have a start and end from the top left cell and bottom right cell
+        MazeCells.ElementAt((mazeRows - 1) * mazeColumns).Value.RemoveWall(Cell.CellWalls.LeftWall);
+        MazeCells.ElementAt(mazeRows - 1).Value.RemoveWall(Cell.CellWalls.RightWall);
     }
 
     private void GenerateMaze(ChosenAlgorithm chosen)

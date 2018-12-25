@@ -59,7 +59,7 @@ public class BackTracker : MonoBehaviour
         while (unVisited.Count > 0)
         {
             cells[currentCell].StopHighlightCell();
-
+         
             // Step 2.1
             var nextCell = cells[currentCell].GetNeighbour();
 
@@ -94,6 +94,9 @@ public class BackTracker : MonoBehaviour
                 yield return null;
             }
         }
+
+        // We put this line here just to stop highlighting the last cell because we dont enter the while loop again
+        cells[currentCell].StopHighlightCell();
 
         mazeManager.ShowMenu();
     }
