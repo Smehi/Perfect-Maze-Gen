@@ -37,6 +37,7 @@ public class MazeManager : MonoBehaviour
     [SerializeField] private Slider columnsInput;
     [SerializeField] private Text delayText;
     [SerializeField] private Slider delayInput;
+    [SerializeField] private Dropdown dropdownInput;
 
     // Use this for initialization
     public void Generate()
@@ -131,6 +132,11 @@ public class MazeManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void SetAlgorithm()
+    {
+        chosenAlgorithm = (ChosenAlgorithm)dropdownInput.value;
     }
 
     public void SetRows()
