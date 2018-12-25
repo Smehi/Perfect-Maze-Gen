@@ -128,9 +128,11 @@ public class MazeManager : MonoBehaviour
         switch (chosen)
         {
             case ChosenAlgorithm.BackTracker:
+                GetComponent<RandomizedPrims>().StopAllCoroutines();
                 GetComponent<BackTracker>().Init();
                 break;
             case ChosenAlgorithm.RandomizedPrims:
+                GetComponent<BackTracker>().StopAllCoroutines();
                 GetComponent<RandomizedPrims>().Init();
                 break;
             default:
