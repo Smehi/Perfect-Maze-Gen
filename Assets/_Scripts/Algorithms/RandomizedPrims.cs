@@ -9,7 +9,6 @@ public class RandomizedPrims : MonoBehaviour
     private MazeManager mazeManager;
     private GameObject currentCell;
     private Dictionary<GameObject, Cell> cells = new Dictionary<GameObject, Cell>();
-    private List<GameObject> unVisited = new List<GameObject>();
     private List<GameObject> walls = new List<GameObject>();
     private IEnumerator currentSolve;
 
@@ -21,7 +20,6 @@ public class RandomizedPrims : MonoBehaviour
         mazeManager = null;
         currentCell = null;
         cells = new Dictionary<GameObject, Cell>();
-        unVisited = new List<GameObject>();
         walls = new List<GameObject>();
 
         mazeManager = GetComponent<MazeManager>();
@@ -31,9 +29,6 @@ public class RandomizedPrims : MonoBehaviour
 
         foreach (KeyValuePair<GameObject, Cell> pair in cells)
         {
-            // We need to add all the cells into the unvisted list to loop through
-            unVisited.Add(cells[pair.Key].gameObject);
-
             // We also need to inject the dictionary with all the cells into every cell to find neighbours
             cells[pair.Key].MazeCells = cells;
         }
