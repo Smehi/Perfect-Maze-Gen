@@ -19,10 +19,10 @@ public class MazeManager : MonoBehaviour
     [SerializeField] private GameObject cellPrefab;
     private float cellWidth;
     private float cellHeight;
-    private Color cellBackgroundColor;
-    private Color cellWallColor;
-    private Color cellHighlightColor;
-    private Color cellVisitedColor;
+    private Vector3 cellBackgroundColor;
+    private Vector3 cellWallColor;
+    private Vector3 cellHighlightColor;
+    private Vector3 cellVisitedColor;
 
     [Header("Algorithm")]
     [SerializeField] private Behaviour[] algoritmScripts;
@@ -181,6 +181,7 @@ public class MazeManager : MonoBehaviour
 
         Color color = new Color(r, g, b);
         backgroundTextImage.color = color;
+        cellBackgroundColor = new Vector3(color.r, color.g, color.b);
     }
 
     public void SetWallColor()
@@ -191,6 +192,7 @@ public class MazeManager : MonoBehaviour
 
         Color color = new Color(r, g, b);
         wallTextImage.color = color;
+        cellWallColor = new Vector3(color.r, color.g, color.b);
     }
 
     public void SetHighlightColor()
@@ -201,6 +203,7 @@ public class MazeManager : MonoBehaviour
 
         Color color = new Color(r, g, b);
         highlightTextImage.color = color;
+        cellHighlightColor = new Vector3(color.r, color.g, color.b);
     }
 
     public void SetVisitedColor()
@@ -211,6 +214,7 @@ public class MazeManager : MonoBehaviour
 
         Color color = new Color(r, g, b);
         visitedTextImage.color = color;
+        cellVisitedColor = new Vector3(color.r, color.g, color.b);
     }
 
     public void SetRows()

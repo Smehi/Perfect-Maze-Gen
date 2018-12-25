@@ -19,8 +19,10 @@ public class Cell : MonoBehaviour
     // This will keep a reference to the walls that have been set in the editor
     [SerializeField] private GameObject[] walls;
     private bool isVisited;
-    private Color backgroundColor;
-    private Color wallColor;
+    public Color backgroundColor;
+    public Color wallColor;
+    public Color highlightColor;
+    public Color visitedColor;
 
     // Removes a wall with the help of the enum
     public void RemoveWall(CellWalls wall)
@@ -113,49 +115,63 @@ public class Cell : MonoBehaviour
 
     public void StopHighlightCell()
     {
-        GetComponent<Image>().color = HighlightColor;
+        GetComponent<Image>().color = highlightColor;
     }
 
-    public Color BackgroundColor
+    public Vector3 BackgroundColor
     {
         get
         {
-            return backgroundColor;
+            return new Vector3(backgroundColor.r, backgroundColor.g, backgroundColor.b);
         }
         set
         {
-            backgroundColor = value;
+            backgroundColor = new Color(value.x, value.y, value.z);
             GetComponent<Image>().color = backgroundColor;
+            print("input: " + value);
+            print("output: " + backgroundColor);
         }
     }
 
-    public Color WallColor
+    public Vector3 WallColor
     {
         get
         {
-            return wallColor;
+            return new Vector3(wallColor.r, wallColor.g, wallColor.b);
         }
         set
         {
-            wallColor = value;
+            wallColor = new Color(value.x, value.y, value.z);
 
             foreach (GameObject wall in walls)
             {
-                GetComponent<Image>().color = wallColor; 
+                wall.GetComponent<Image>().color = wallColor; 
             }
         }
     }
 
-    public Color HighlightColor
+    public Vector3 HighlightColor
     {
-        get;
-        set;
+        get
+        {
+            return new Vector3(highlightColor.r, highlightColor.g, highlightColor.b);
+        }
+        set
+        {
+            highlightColor = new Color(value.x, value.y, value.z);
+        }
     }
 
-    public Color VisitedColor
+    public Vector3 VisitedColor
     {
-        get;
-        set;
+        get
+        {
+            return new Vector3(visitedColor.r, visitedColor.g, visitedColor.b);
+        }
+        set
+        {
+            visitedColor = new Color(value.x, value.y, value.z);
+        }
     }
 
     public bool IsVisited
@@ -167,7 +183,7 @@ public class Cell : MonoBehaviour
         set
         {
             isVisited = value;
-            GetComponent<Image>().color = VisitedColor;
+            GetComponent<Image>().color = visitedColor;
         }
     }
 
