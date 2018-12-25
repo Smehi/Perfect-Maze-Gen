@@ -68,8 +68,8 @@ public class MazeManager : MonoBehaviour
         }
 
         // Recalculate the cell width and height
-        cellWidth = Screen.width / mazeColumns;
-        cellHeight = Screen.height / mazeRows;
+        cellWidth = (float)Screen.width / (float)mazeColumns;
+        cellHeight = (float)Screen.height / (float)mazeRows;
 
         // Empty the cells list for repopulation
         previousCells.Clear();
