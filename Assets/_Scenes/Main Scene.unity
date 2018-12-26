@@ -2320,6 +2320,8 @@ MonoBehaviour:
   mazeRows: 4
   mazeColumns: 4
   mazeCanvas: {fileID: 1757623117}
+  playerPrefab: {fileID: 1611397443343862, guid: 46120d58944db09479d2a408846c577e,
+    type: 2}
   delay: 0
   cellPrefab: {fileID: 1462508249115054, guid: 95b6390666de1c94b818fe80f137904b, type: 2}
   cellBackgroundColor: {r: 1, g: 1, b: 1, a: 1}

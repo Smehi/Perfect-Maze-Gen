@@ -11,6 +11,7 @@ public class MazeManager : MonoBehaviour
     [SerializeField] private int mazeRows;
     [SerializeField] private int mazeColumns;
     [SerializeField] private GameObject mazeCanvas;
+    [SerializeField] private GameObject playerPrefab;
     [Range(0, 1)] [SerializeField] private float delay;
 
     private Dictionary<GameObject, Cell> mazeCells = new Dictionary<GameObject, Cell>();
@@ -143,7 +144,24 @@ public class MazeManager : MonoBehaviour
 
         // We do this at the end of generating the maze just so we have a start and end from the top left cell and bottom right cell
         MazeCells.ElementAt((mazeRows - 1) * mazeColumns).Value.RemoveWall(Cell.CellWalls.LeftWall);
-        MazeCells.ElementAt(mazeRows - 1).Value.RemoveWall(Cell.CellWalls.RightWall);
+        MazeCells.ElementAt(mazeColumns - 1).Value.RemoveWall(Cell.CellWalls.RightWall);
+
+        // Make the player
+        GameObject player = Instantiate(playerPrefab);
+
+        player.transform.SetParent(mazeCanvas.transform);
+
+        // Put the player in the top left cell
+        player.transform.position = new Vector2(0 * cellWidth + (cellWidth / 2), (mazeRows - 1) * cellHeight + (cellHeight / 2));
+        player.transform.localScale = new Vector2(cellWidth, cellHeight);
+        player.name = "Player";
+
+        PlayerController pc = player.GetComponent<PlayerController>();
+        pc.Position = new Vector2(0, mazeRows - 1);
+        pc.Rows = mazeRows;
+        pc.Columns = mazeColumns;
+        pc.Width = cellWidth;
+        pc.Height = cellHeight;
     }
 
     private void GenerateMaze(ChosenAlgorithm chosen)
