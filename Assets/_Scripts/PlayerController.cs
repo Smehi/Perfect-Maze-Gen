@@ -46,6 +46,18 @@ public class PlayerController : MonoBehaviour
 
         Position = newPosition;
         transform.position = new Vector2(newPosition.x * Width + (Width / 2), newPosition.y * Height + (Height / 2));
+
+        // Show the menu when we reach the end of the maze
+        if (Position == new Vector2(Columns - 1, 0))
+        {
+            MazeManager.ShowMenu();
+        }
+    }
+
+    public MazeManager MazeManager
+    {
+        get;
+        set;
     }
 
     public Vector2 Position

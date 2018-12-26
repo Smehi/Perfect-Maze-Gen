@@ -145,10 +145,14 @@ public class MazeManager : MonoBehaviour
         // We do this at the end of generating the maze just so we have a start and end from the top left cell and bottom right cell
         MazeCells.ElementAt((mazeRows - 1) * mazeColumns).Value.RemoveWall(Cell.CellWalls.LeftWall);
         MazeCells.ElementAt(mazeColumns - 1).Value.RemoveWall(Cell.CellWalls.RightWall);
+    }
 
+    public void SpawnPlayer()
+    {
         // Make the player
         GameObject player = Instantiate(playerPrefab);
 
+        // Set the parent for the same reasons as the cell
         player.transform.SetParent(mazeCanvas.transform);
 
         // Put the player in the top left cell
@@ -156,7 +160,9 @@ public class MazeManager : MonoBehaviour
         player.transform.localScale = new Vector2(cellWidth, cellHeight);
         player.name = "Player";
 
+        // Set all the needed information 
         PlayerController pc = player.GetComponent<PlayerController>();
+        pc.MazeManager = this;
         pc.Position = new Vector2(0, mazeRows - 1);
         pc.Rows = mazeRows;
         pc.Columns = mazeColumns;

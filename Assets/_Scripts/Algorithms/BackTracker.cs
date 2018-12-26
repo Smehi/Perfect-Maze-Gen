@@ -98,7 +98,8 @@ public class BackTracker : MonoBehaviour
         // We put this line here just to stop highlighting the last cell because we dont enter the while loop again
         cells[currentCell].StopHighlightCell();
 
-        mazeManager.ShowMenu();
+        // Spawn the player when the algorithm is done with the maze
+        mazeManager.SpawnPlayer();
     }
 
     private void RemoveWalls(Cell cell1, Cell cell2)
