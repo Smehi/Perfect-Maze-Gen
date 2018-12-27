@@ -155,6 +155,7 @@ public class RandomizedPrims : MonoBehaviour
             }
         }
 
-        mazeManager.ShowMenu();
+        // Spawn the player when the algorithm is done with the maze
+        mazeManager.SpawnPlayer();
     }
 }

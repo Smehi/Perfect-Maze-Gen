@@ -44,6 +44,43 @@ public class Cell : MonoBehaviour
         }
     }
 
+    public bool GetWallStatus(CellWalls wall)
+    {
+        switch (wall)
+        {
+            case CellWalls.TopWall:
+                if (walls[0].activeSelf)
+                {
+                    return true;
+                }
+
+                break;
+            case CellWalls.RightWall:
+                if (walls[1].activeSelf)
+                {
+                    return true;
+                }
+
+                break;
+            case CellWalls.BottomWall:
+                if (walls[2].activeSelf)
+                {
+                    return true;
+                }
+
+                break;
+            case CellWalls.LeftWall:
+                if (walls[3].activeSelf)
+                {
+                    return true;
+                }
+
+                break;
+        }
+
+        return false;
+    }
+
     public List<GameObject> GetWalls()
     {
         List<GameObject> newWalls = new List<GameObject>();
