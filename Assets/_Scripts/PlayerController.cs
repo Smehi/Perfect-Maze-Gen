@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -41,8 +42,44 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+        
+        // Check for the right or left wall
+        switch ((int)Position.x - (int)newPosition.x)
+        {
+            case -1:
+                if (MazeCells.ElementAt((int)(Position.x + Position.y * Columns)).Value.GetWallStatus(Cell.CellWalls.RightWall))
+                {
+                    return;
+                }
 
-        // TODO: check if the player is not trying to pass through a wall.
+                break;
+            case 1:
+                if (MazeCells.ElementAt((int)(Position.x + Position.y * Columns)).Value.GetWallStatus(Cell.CellWalls.LeftWall))
+                {
+                    return;
+                }
+
+                break;
+        }
+
+        // Check for the top or bottom wall
+        switch ((int)Position.y - (int)newPosition.y)
+        {
+            case -1:
+                if (MazeCells.ElementAt((int)(Position.x + Position.y * Columns)).Value.GetWallStatus(Cell.CellWalls.TopWall))
+                {
+                    return;
+                }
+
+                break;
+            case 1:
+                if (MazeCells.ElementAt((int)(Position.x + Position.y * Columns)).Value.GetWallStatus(Cell.CellWalls.BottomWall))
+                {
+                    return;
+                }
+
+                break;
+        }
 
         Position = newPosition;
         transform.position = new Vector2(newPosition.x * Width + (Width / 2), newPosition.y * Height + (Height / 2));
@@ -89,6 +126,10 @@ public class PlayerController : MonoBehaviour
         get;
         set;
     }
-
-    // TODO: Get a list of all the cells
+    
+    public Dictionary<GameObject, Cell> MazeCells
+    {
+        get;
+        set;
+    }
 }

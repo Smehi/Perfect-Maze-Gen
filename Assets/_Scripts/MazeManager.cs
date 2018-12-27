@@ -13,6 +13,7 @@ public class MazeManager : MonoBehaviour
     [SerializeField] private GameObject mazeCanvas;
     [SerializeField] private GameObject playerPrefab;
     [Range(0, 1)] [SerializeField] private float delay;
+    private GameObject player;
 
     private Dictionary<GameObject, Cell> mazeCells = new Dictionary<GameObject, Cell>();
     private List<GameObject> previousCells = new List<GameObject>();
@@ -149,8 +150,14 @@ public class MazeManager : MonoBehaviour
 
     public void SpawnPlayer()
     {
+        // We want to delete the previous player if there is one
+        if (player)
+        {
+            Destroy(player);
+        }
+         
         // Make the player
-        GameObject player = Instantiate(playerPrefab);
+        player = Instantiate(playerPrefab);
 
         // Set the parent for the same reasons as the cell
         player.transform.SetParent(mazeCanvas.transform);
@@ -168,6 +175,7 @@ public class MazeManager : MonoBehaviour
         pc.Columns = mazeColumns;
         pc.Width = cellWidth;
         pc.Height = cellHeight;
+        pc.MazeCells = MazeCells;
     }
 
     private void GenerateMaze(ChosenAlgorithm chosen)
