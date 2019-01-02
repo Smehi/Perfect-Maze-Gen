@@ -2299,6 +2299,7 @@ GameObject:
   - component: {fileID: 565371517}
   - component: {fileID: 565371519}
   - component: {fileID: 565371520}
+  - component: {fileID: 565371521}
   m_Layer: 0
   m_Name: Maze Generator
   m_TagString: Untagged
@@ -2331,6 +2332,7 @@ MonoBehaviour:
   algoritmScripts:
   - {fileID: 565371519}
   - {fileID: 565371520}
+  - {fileID: 565371521}
   chosenAlgorithm: 0
   userInputCanvas: {fileID: 349162588}
   rowsText: {fileID: 1265004669}
@@ -2389,6 +2391,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5550089f2dff0c04486ddbb1ac158bc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &565371521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 565371516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe52d907afc308498dbfeec83074552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &578479387
@@ -4458,6 +4471,8 @@ MonoBehaviour:
     - m_Text: Recursive Backtracking
       m_Image: {fileID: 0}
     - m_Text: Randomized Prim's
+      m_Image: {fileID: 0}
+    - m_Text: Wilson's Algorithm
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -6734,7 +6749,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1375476910}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.8489263
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
