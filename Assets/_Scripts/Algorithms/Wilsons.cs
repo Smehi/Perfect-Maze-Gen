@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Wilsons : MonoBehaviour
 {
@@ -68,6 +69,7 @@ public class Wilsons : MonoBehaviour
 
             do
             {
+                currentCell.GetComponent<Cell>().HighlightCell();
                 foundMaze = RandomWalk(currentCell);
 
                 if (delay > 0)
@@ -83,6 +85,9 @@ public class Wilsons : MonoBehaviour
 
             EraseLoop(newStartCell);
         }
+
+        // Spawn the player when the algorithm is done with the maze
+        mazeManager.SpawnPlayer();
     }
 
     private bool RandomWalk(GameObject cell)
@@ -136,6 +141,7 @@ public class Wilsons : MonoBehaviour
 
         if (randomNeighbour)
         {
+            cellScript.HighlightCell();
             directedCells[cell] = randomDirection;
             currentCell = randomNeighbour;
         }
@@ -155,6 +161,14 @@ public class Wilsons : MonoBehaviour
     {
         if (!directedCells.ContainsKey(cellObject))
         {
+            foreach (KeyValuePair<GameObject, Direction> pair in directedCells)
+            {
+                if (!pair.Key.GetComponent<Cell>().IsVisited)
+                {
+                    pair.Key.GetComponent<Image>().color = Color.white;
+                }
+            }
+
             directedCells.Clear();
             return;
         }

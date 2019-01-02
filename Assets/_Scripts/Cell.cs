@@ -155,6 +155,11 @@ public class Cell : MonoBehaviour
         GetComponent<Image>().color = visitedColor;
     }
 
+    public void HighlightCell()
+    {
+        GetComponent<Image>().color = highlightColor;
+    }
+
     public Color BackgroundColor
     {
         get
