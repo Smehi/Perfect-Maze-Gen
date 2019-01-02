@@ -57,6 +57,7 @@ public class Wilsons : MonoBehaviour
 
     private IEnumerator SolveMaze(float delay)
     {
+        // We start by adding the first cell to the maze which will be our target
         GameObject start = remaining.ElementAt(Random.Range(0, remaining.Count));
         start.GetComponent<Cell>().IsVisited = true;
         start.GetComponent<Cell>().StopHighlightCell();
@@ -64,12 +65,14 @@ public class Wilsons : MonoBehaviour
 
         while (remaining.Count > 0)
         {
+            // We get a random new cell from the list that remains
             newStartCell = remaining.ElementAt(Random.Range(0, remaining.Count));
             currentCell = newStartCell;
 
+            // We do this loop while we haven't found the maze yet
             do
             {
-                currentCell.GetComponent<Cell>().HighlightCell();
+                // With the new cell we do a random walk which return a boolean: true if we found the maze, false if not
                 foundMaze = RandomWalk(currentCell);
 
                 if (delay > 0)
@@ -83,6 +86,8 @@ public class Wilsons : MonoBehaviour
             }
             while (!foundMaze);
 
+            // This is when we exit the second while which means we found the maze
+            // Not it is time to erase the loops and make a path
             EraseLoop(newStartCell);
         }
 
@@ -96,9 +101,10 @@ public class Wilsons : MonoBehaviour
         int pos;
         Cell cellScript = cell.GetComponent<Cell>();
 
+        // We choose a random direction to go in
         Direction randomDirection = (Direction)Random.Range(0, 4);
 
-        // Directions are up, right, down, left
+        // If we go into a direction which contains another cell we mark it as our neighbour
         switch (randomDirection)
         {
             case Direction.Up:
@@ -139,6 +145,9 @@ public class Wilsons : MonoBehaviour
                 break;
         }
 
+        // If we went into a direction which had a neigbour we highlight the current cell
+        // We also add it to a dictionary which hold the object as the key and the latest direction it went in as the value
+        // At last we set the new cell to the neighbour we got so the process can repeat
         if (randomNeighbour)
         {
             cellScript.HighlightCell();
@@ -159,30 +168,41 @@ public class Wilsons : MonoBehaviour
 
     private void EraseLoop(GameObject cellObject)
     {
+        // We check at the start is the object we put in is part of the dictionary
+        // If it isn't it means we have done all the cells that were needed and got to the maze so we are done
         if (!directedCells.ContainsKey(cellObject))
         {
+            // Reset all the cells that got highlighted but not added to the maze
             foreach (KeyValuePair<GameObject, Direction> pair in directedCells)
             {
                 if (!pair.Key.GetComponent<Cell>().IsVisited)
                 {
-                    pair.Key.GetComponent<Image>().color = Color.white;
+                    pair.Key.GetComponent<Image>().color = pair.Key.GetComponent<Cell>().BackgroundColor;
                 }
             }
 
+            // Clear the list and return for the next cycle 
             directedCells.Clear();
             return;
         }
 
+        // Initialization values for this cell
         Cell cellScript;
         Direction cellDirection;
 
         cellScript = cellObject.GetComponent<Cell>();
         cellDirection = directedCells[cellObject];
 
+        // Here we set the cell to be visited which means it is now part of the maze
         cellScript.IsVisited = true;
         cellScript.StopHighlightCell();
+
+        // Because it is part of the maze now we have to remove it from the remaining cells list
         remaining.Remove(cellObject);
 
+        // Here we check what direction this cell has
+        // We remove the wall from this cell towards the direction and remove the opposite wall from the adjacent cell in that direction
+        // After removing the walls we call this method again with the adjacent cell in that direction so the process can repeat
         switch (cellDirection)
         {
             case Direction.Up:
