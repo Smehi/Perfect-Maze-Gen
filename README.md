@@ -11,7 +11,7 @@ There are also a couple variables which need to be set in the inspector such as 
 If you want to use this project to add your own maze algorithms you can do so by:
 1. Add it to the ChosenAlgorithm enum in MazeManager.cs.
 2. Call the script in the switch in the GenerateMaze method in MazeManager.cs.
-3. Add the script to the MazeManager GameObject.
-4. Increase the size of Algorithm Scripts in the inspector on the MazeManager GameObject.
-5. Add the script that is on the MazeManager GameObject in the array that you just increased.
+3. Add the script to the Maze Generator GameObject.
+4. Increase the size of Algorithm Scripts in the inspector on the Maze Generator GameObject.
+5. Add the script that is on the Maze Generator GameObject in the array that you just increased.
 6. Find the dropdown component in the canvas and add a new option (name can be whatever you want, it is linked to the position of the enum in step 1).

@@ -96,7 +96,7 @@ public class Cell : MonoBehaviour
         return newWalls;
     }
 
-    public GameObject GetNeighbour()
+    public GameObject GetRandomAvailableNeighbour()
     {
         List<GameObject> neighbours = new List<GameObject>();
 
