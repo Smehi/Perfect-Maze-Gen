@@ -59,9 +59,9 @@ public class BackTracker : MonoBehaviour
         while (unVisited.Count > 0)
         {
             cells[currentCell].StopHighlightCell();
-
+         
             // Step 2.1
-            var nextCell = cells[currentCell].GetNeighbour();
+            var nextCell = cells[currentCell].GetRandomAvailableNeighbour();
 
             if (nextCell)
             {
@@ -95,7 +95,11 @@ public class BackTracker : MonoBehaviour
             }
         }
 
-        mazeManager.ShowMenu();
+        // We put this line here just to stop highlighting the last cell because we dont enter the while loop again
+        cells[currentCell].StopHighlightCell();
+
+        // Spawn the player when the algorithm is done with the maze
+        mazeManager.SpawnPlayer();
     }
 
     private void RemoveWalls(Cell cell1, Cell cell2)
