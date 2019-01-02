@@ -96,7 +96,7 @@ public class Cell : MonoBehaviour
         return newWalls;
     }
 
-    public GameObject GetNeighbour()
+    public GameObject GetRandomAvailableNeighbour()
     {
         List<GameObject> neighbours = new List<GameObject>();
 
@@ -153,6 +153,11 @@ public class Cell : MonoBehaviour
     public void StopHighlightCell()
     {
         GetComponent<Image>().color = visitedColor;
+    }
+
+    public void HighlightCell()
+    {
+        GetComponent<Image>().color = highlightColor;
     }
 
     public Color BackgroundColor

@@ -61,7 +61,7 @@ public class BackTracker : MonoBehaviour
             cells[currentCell].StopHighlightCell();
          
             // Step 2.1
-            var nextCell = cells[currentCell].GetNeighbour();
+            var nextCell = cells[currentCell].GetRandomAvailableNeighbour();
 
             if (nextCell)
             {

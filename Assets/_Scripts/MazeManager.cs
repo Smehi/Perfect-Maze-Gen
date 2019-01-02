@@ -34,7 +34,8 @@ public class MazeManager : MonoBehaviour
     private enum ChosenAlgorithm
     {
         BackTracker,
-        RandomizedPrims
+        RandomizedPrims,
+        Wilsons
     }
 
     [Header("UI Variables")]
@@ -194,13 +195,18 @@ public class MazeManager : MonoBehaviour
         {
             case ChosenAlgorithm.BackTracker:
                 GetComponent<RandomizedPrims>().StopAllCoroutines();
+                GetComponent<Wilsons>().StopAllCoroutines();
                 GetComponent<BackTracker>().Init();
                 break;
             case ChosenAlgorithm.RandomizedPrims:
                 GetComponent<BackTracker>().StopAllCoroutines();
+                GetComponent<Wilsons>().StopAllCoroutines();
                 GetComponent<RandomizedPrims>().Init();
                 break;
-            default:
+            case ChosenAlgorithm.Wilsons:
+                GetComponent<BackTracker>().StopAllCoroutines();
+                GetComponent<RandomizedPrims>().StopAllCoroutines();
+                GetComponent<Wilsons>().Init();
                 break;
         }
     }
