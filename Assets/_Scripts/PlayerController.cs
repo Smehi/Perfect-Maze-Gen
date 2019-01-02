@@ -5,33 +5,43 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Range(0.15f, 0.3f)] [SerializeField] private float moveInterval;
+    private float nextMove = 0;
+
     // Update is called once per frame
     void Update()
     {
-        // Get input to move the player
-        // We also return after a keystroke because we don't wan't players to cross diagonally.
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (Time.time > nextMove)
         {
-            SetNewPosition(new Vector2(Position.x, Position.y + 1));
-            return;
-        }
+            // Get input to move the player
+            // We also return after a keystroke because we don't wan't players to cross diagonally
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            {
+                SetNewPosition(new Vector2(Position.x, Position.y + 1));
+                nextMove = Time.time + moveInterval;
+                return;
+            }
 
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            SetNewPosition(new Vector2(Position.x - 1, Position.y));
-            return;
-        }
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            {
+                SetNewPosition(new Vector2(Position.x - 1, Position.y));
+                nextMove = Time.time + moveInterval;
+                return;
+            }
 
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            SetNewPosition(new Vector2(Position.x, Position.y - 1));
-            return;
-        }
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            {
+                SetNewPosition(new Vector2(Position.x, Position.y - 1));
+                nextMove = Time.time + moveInterval;
+                return;
+            }
 
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            SetNewPosition(new Vector2(Position.x + 1, Position.y));
-            return;
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                SetNewPosition(new Vector2(Position.x + 1, Position.y));
+                nextMove = Time.time + moveInterval;
+                return;
+            }
         }
     }
 
@@ -42,7 +52,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        
+
         // Check for the right or left wall
         switch ((int)Position.x - (int)newPosition.x)
         {
@@ -126,7 +136,7 @@ public class PlayerController : MonoBehaviour
         get;
         set;
     }
-    
+
     public Dictionary<GameObject, Cell> MazeCells
     {
         get;
