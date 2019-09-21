@@ -491,7 +491,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetHighlightColor
         m_Mode: 1
         m_Arguments:
@@ -724,7 +724,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetWallColor
         m_Mode: 1
         m_Arguments:
@@ -820,7 +820,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetWallColor
         m_Mode: 1
         m_Arguments:
@@ -1194,7 +1194,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetVisitedColor
         m_Mode: 1
         m_Arguments:
@@ -1497,7 +1497,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetBackgroundColor
         m_Mode: 1
         m_Arguments:
@@ -2254,7 +2254,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetRows
         m_Mode: 1
         m_Arguments:
@@ -2296,7 +2296,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 565371518}
+  - component: {fileID: 565371522}
   - component: {fileID: 565371517}
+  - component: {fileID: 565371523}
   - component: {fileID: 565371519}
   - component: {fileID: 565371520}
   - component: {fileID: 565371521}
@@ -2318,46 +2320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52b5c4c37c39c34cb6c755d53d48b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mazeRows: 4
-  mazeColumns: 4
-  mazeCanvas: {fileID: 1757623117}
-  playerPrefab: {fileID: 1611397443343862, guid: 46120d58944db09479d2a408846c577e,
-    type: 2}
-  delay: 0
-  cellPrefab: {fileID: 1462508249115054, guid: 95b6390666de1c94b818fe80f137904b, type: 2}
-  cellBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  cellWallColor: {r: 0, g: 0, b: 0, a: 1}
-  cellHighlightColor: {r: 0, g: 1, b: 1, a: 1}
-  cellVisitedColor: {r: 0, g: 0, b: 1, a: 1}
-  algoritmScripts:
-  - {fileID: 565371519}
-  - {fileID: 565371520}
-  - {fileID: 565371521}
-  chosenAlgorithm: 0
-  userInputCanvas: {fileID: 349162588}
-  rowsText: {fileID: 1265004669}
-  rowsInput: {fileID: 480941966}
-  columnsText: {fileID: 1891315250}
-  columnsInput: {fileID: 2004758011}
-  delayText: {fileID: 1068339255}
-  delayInput: {fileID: 2026712456}
-  dropdownInput: {fileID: 1209692283}
-  backgroundTextImage: {fileID: 651973047}
-  backgroundRed: {fileID: 643266596}
-  backgroundGreen: {fileID: 318149256}
-  backgroundBlue: {fileID: 1306918762}
-  wallTextImage: {fileID: 860785633}
-  wallRed: {fileID: 633559184}
-  wallGreen: {fileID: 166675238}
-  wallBlue: {fileID: 155384156}
-  highlightTextImage: {fileID: 729290813}
-  highlightRed: {fileID: 1391164699}
-  highlightGreen: {fileID: 146220868}
-  highlightBlue: {fileID: 1983937763}
-  visitedTextImage: {fileID: 1868286225}
-  visitedRed: {fileID: 1551887938}
-  visitedGreen: {fileID: 253479441}
-  visitedBlue: {fileID: 1524650718}
 --- !u!4 &565371518
 Transform:
   m_ObjectHideFlags: 0
@@ -2377,7 +2339,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 565371516}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d5eab0d2c063894ca12635531b6d0a8, type: 3}
   m_Name: 
@@ -2402,6 +2364,63 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fe52d907afc308498dbfeec83074552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &565371522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 565371516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 403125dae07bcea4b85c16da0332f929, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mazeRows: 4
+  mazeColumns: 4
+  mazeCanvas: {fileID: 1757623117}
+  playerPrefab: {fileID: 1611397443343862, guid: 46120d58944db09479d2a408846c577e,
+    type: 2}
+  delay: 0
+  cellPrefab: {fileID: 1462508249115054, guid: 95b6390666de1c94b818fe80f137904b, type: 2}
+  cellBackgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  cellWallColor: {r: 0, g: 0, b: 0, a: 1}
+  cellHighlightColor: {r: 0, g: 1, b: 1, a: 1}
+  cellVisitedColor: {r: 0, g: 0, b: 1, a: 1}
+  userInputCanvas: {fileID: 349162588}
+  rowsText: {fileID: 1265004669}
+  rowsInput: {fileID: 480941966}
+  columnsText: {fileID: 1891315250}
+  columnsInput: {fileID: 2004758011}
+  delayText: {fileID: 1068339255}
+  delayInput: {fileID: 2026712456}
+  dropdownInput: {fileID: 1209692283}
+  backgroundTextImage: {fileID: 651973047}
+  backgroundRed: {fileID: 643266596}
+  backgroundGreen: {fileID: 318149256}
+  backgroundBlue: {fileID: 1306918762}
+  wallTextImage: {fileID: 860785633}
+  wallRed: {fileID: 633559184}
+  wallGreen: {fileID: 166675238}
+  wallBlue: {fileID: 155384156}
+  highlightTextImage: {fileID: 729290813}
+  highlightRed: {fileID: 1391164699}
+  highlightGreen: {fileID: 146220868}
+  highlightBlue: {fileID: 1983937763}
+  visitedTextImage: {fileID: 1868286225}
+  visitedRed: {fileID: 1551887938}
+  visitedGreen: {fileID: 253479441}
+  visitedBlue: {fileID: 1524650718}
+--- !u!114 &565371523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 565371516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f36021f4de2a54e99665b5d4ac11ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &578479387
@@ -2659,7 +2678,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetWallColor
         m_Mode: 1
         m_Arguments:
@@ -2755,7 +2774,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetBackgroundColor
         m_Mode: 1
         m_Arguments:
@@ -4477,7 +4496,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetAlgorithm
         m_Mode: 1
         m_Arguments:
@@ -5125,7 +5144,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetBackgroundColor
         m_Mode: 1
         m_Arguments:
@@ -5704,7 +5723,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetHighlightColor
         m_Mode: 1
         m_Arguments:
@@ -6221,7 +6240,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetVisitedColor
         m_Mode: 1
         m_Arguments:
@@ -6351,7 +6370,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetVisitedColor
         m_Mode: 1
         m_Arguments:
@@ -6749,7 +6768,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1375476910}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.8489263
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8121,7 +8140,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetHighlightColor
         m_Mode: 1
         m_Arguments:
@@ -8196,7 +8215,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetColumns
         m_Mode: 1
         m_Arguments:
@@ -8439,7 +8458,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 565371517}
+      - m_Target: {fileID: 565371522}
         m_MethodName: SetDelay
         m_Mode: 1
         m_Arguments:

@@ -3,29 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class RandomizedPrims : MonoBehaviour
+public class RandomizedPrims : MonoBehaviour, IAlgorithm
 {
     private float delay;
-    private MazeManager mazeManager;
+    private MazeGridGenerator mazeGridGenerator;
     private GameObject currentCell;
     private Dictionary<GameObject, Cell> cells = new Dictionary<GameObject, Cell>();
     private List<GameObject> walls = new List<GameObject>();
     private IEnumerator currentSolve;
 
-    // Use this for initialization
-    public void Init()
+    public void Begin()
     {
         // Reset all the values
         delay = 0;
-        mazeManager = null;
+        mazeGridGenerator = null;
         currentCell = null;
         cells = new Dictionary<GameObject, Cell>();
         walls = new List<GameObject>();
 
-        mazeManager = GetComponent<MazeManager>();
+        mazeGridGenerator = GetComponent<MazeGridGenerator>();
 
-        delay = mazeManager.Delay;
-        cells = mazeManager.MazeCells;
+        delay = MazeInput.Instance.Delay;
+        cells = mazeGridGenerator.MazeCells;
 
         foreach (KeyValuePair<GameObject, Cell> pair in cells)
         {
@@ -41,6 +40,11 @@ public class RandomizedPrims : MonoBehaviour
 
         currentSolve = SolveMaze(delay);
         StartCoroutine(currentSolve);
+    }
+
+    public void End()
+    {
+        this.StopAllCoroutines();
     }
 
     private IEnumerator SolveMaze(float delay)
@@ -156,6 +160,6 @@ public class RandomizedPrims : MonoBehaviour
         }
 
         // Spawn the player when the algorithm is done with the maze
-        mazeManager.SpawnPlayer();
+        mazeGridGenerator.SpawnPlayer();
     }
 }

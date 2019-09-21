@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public MazeManager MazeManager
+    public MazeGridGenerator MazeManager
     {
         get;
         set;

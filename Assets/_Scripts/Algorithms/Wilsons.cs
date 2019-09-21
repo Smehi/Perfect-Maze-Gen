@@ -4,10 +4,10 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Wilsons : MonoBehaviour
+public class Wilsons : MonoBehaviour, IAlgorithm
 {
     private float delay;
-    private MazeManager mazeManager;
+    private MazeGridGenerator mazeGridGenerator;
     private GameObject currentCell;
     private GameObject newStartCell;
     private Dictionary<GameObject, Direction> directedCells = new Dictionary<GameObject, Direction>();
@@ -23,26 +23,25 @@ public class Wilsons : MonoBehaviour
         Left
     }
 
-    // Use this for initialization
-    public void Init()
+    public void Begin()
     {
         // Reset all the values
         delay = 0;
-        mazeManager = null;
+        mazeGridGenerator = null;
         currentCell = null;
         newStartCell = null;
         directedCells = new Dictionary<GameObject, Direction>();
         remaining = new List<GameObject>();
         foundMaze = false;
 
-        mazeManager = GetComponent<MazeManager>();
+        mazeGridGenerator = GetComponent<MazeGridGenerator>();
 
-        delay = mazeManager.Delay;
+        delay = MazeInput.Instance.Delay;
 
-        foreach (KeyValuePair<GameObject, Cell> pair in mazeManager.MazeCells)
+        foreach (KeyValuePair<GameObject, Cell> pair in mazeGridGenerator.MazeCells)
         {
             // We need to add all the cells into the remaining list to loop through
-            remaining.Add(mazeManager.MazeCells[pair.Key].gameObject);
+            remaining.Add(mazeGridGenerator.MazeCells[pair.Key].gameObject);
         }
 
         // Start generating the maze
@@ -53,6 +52,11 @@ public class Wilsons : MonoBehaviour
 
         currentSolve = SolveMaze(delay);
         StartCoroutine(currentSolve);
+    }
+    
+    public void End()
+    {
+        this.StopAllCoroutines();
     }
 
     private IEnumerator SolveMaze(float delay)
@@ -92,7 +96,7 @@ public class Wilsons : MonoBehaviour
         }
 
         // Spawn the player when the algorithm is done with the maze
-        mazeManager.SpawnPlayer();
+        mazeGridGenerator.SpawnPlayer();
     }
 
     private bool RandomWalk(GameObject cell)
@@ -112,7 +116,7 @@ public class Wilsons : MonoBehaviour
 
                 if (pos != -1)
                 {
-                    randomNeighbour = mazeManager.MazeCells.ElementAt(pos).Key;
+                    randomNeighbour = mazeGridGenerator.MazeCells.ElementAt(pos).Key;
                 }
 
                 break;
@@ -121,7 +125,7 @@ public class Wilsons : MonoBehaviour
 
                 if (pos != -1)
                 {
-                    randomNeighbour = mazeManager.MazeCells.ElementAt(pos).Key;
+                    randomNeighbour = mazeGridGenerator.MazeCells.ElementAt(pos).Key;
                 }
 
                 break;
@@ -130,7 +134,7 @@ public class Wilsons : MonoBehaviour
 
                 if (pos != -1)
                 {
-                    randomNeighbour = mazeManager.MazeCells.ElementAt(pos).Key;
+                    randomNeighbour = mazeGridGenerator.MazeCells.ElementAt(pos).Key;
                 }
 
                 break;
@@ -139,7 +143,7 @@ public class Wilsons : MonoBehaviour
 
                 if (pos != -1)
                 {
-                    randomNeighbour = mazeManager.MazeCells.ElementAt(pos).Key;
+                    randomNeighbour = mazeGridGenerator.MazeCells.ElementAt(pos).Key;
                 }
 
                 break;
@@ -209,32 +213,32 @@ public class Wilsons : MonoBehaviour
                 int indexT = cellScript.GetIndex(cellScript.Position.x, cellScript.Position.y + 1);
 
                 cellScript.RemoveWall(Cell.CellWalls.TopWall);
-                mazeManager.MazeCells.ElementAt(indexT).Value.RemoveWall(Cell.CellWalls.BottomWall);
-                EraseLoop(mazeManager.MazeCells.ElementAt(indexT).Key);
+                mazeGridGenerator.MazeCells.ElementAt(indexT).Value.RemoveWall(Cell.CellWalls.BottomWall);
+                EraseLoop(mazeGridGenerator.MazeCells.ElementAt(indexT).Key);
 
                 break;
             case Direction.Right:
                 int indexR = cellScript.GetIndex(cellScript.Position.x + 1, cellScript.Position.y);
 
                 cellScript.RemoveWall(Cell.CellWalls.RightWall);
-                mazeManager.MazeCells.ElementAt(indexR).Value.RemoveWall(Cell.CellWalls.LeftWall);
+                mazeGridGenerator.MazeCells.ElementAt(indexR).Value.RemoveWall(Cell.CellWalls.LeftWall);
 
-                EraseLoop(mazeManager.MazeCells.ElementAt(indexR).Key);
+                EraseLoop(mazeGridGenerator.MazeCells.ElementAt(indexR).Key);
                 break;
             case Direction.Down:
                 int indexD = cellScript.GetIndex(cellScript.Position.x, cellScript.Position.y - 1);
 
                 cellScript.RemoveWall(Cell.CellWalls.BottomWall);
-                mazeManager.MazeCells.ElementAt(indexD).Value.RemoveWall(Cell.CellWalls.TopWall);
-                EraseLoop(mazeManager.MazeCells.ElementAt(indexD).Key);
+                mazeGridGenerator.MazeCells.ElementAt(indexD).Value.RemoveWall(Cell.CellWalls.TopWall);
+                EraseLoop(mazeGridGenerator.MazeCells.ElementAt(indexD).Key);
 
                 break;
             case Direction.Left:
                 int indexL = cellScript.GetIndex(cellScript.Position.x - 1, cellScript.Position.y);
 
                 cellScript.RemoveWall(Cell.CellWalls.LeftWall);
-                mazeManager.MazeCells.ElementAt(indexL).Value.RemoveWall(Cell.CellWalls.RightWall);
-                EraseLoop(mazeManager.MazeCells.ElementAt(indexL).Key);
+                mazeGridGenerator.MazeCells.ElementAt(indexL).Value.RemoveWall(Cell.CellWalls.RightWall);
+                EraseLoop(mazeGridGenerator.MazeCells.ElementAt(indexL).Key);
 
                 break;
         }
