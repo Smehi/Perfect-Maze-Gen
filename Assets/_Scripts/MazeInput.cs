@@ -6,28 +6,6 @@ using UnityEngine.UI;
 #pragma warning disable 0649
 public class MazeInput : MonoBehaviour
 {
-    #region Singleton
-    private static MazeInput _instance;
-
-    public static MazeInput Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                new GameObject("MazeGenerator", new System.Type[]{ typeof(MazeInput),
-                                                                                    typeof(MazeGridGenerator),
-                                                                                    typeof(MazeGenerator),
-                                                                                    typeof(BackTracker),
-                                                                                    typeof(RandomizedPrims),
-                                                                                    typeof(Wilsons) });
-            }
-
-            return _instance;
-        }
-    }
-    #endregion
-
     [Header("Maze properties")]
     [SerializeField] private int mazeRows;
     [SerializeField] private int mazeColumns;
@@ -72,11 +50,6 @@ public class MazeInput : MonoBehaviour
     [SerializeField] private Slider visitedRed;
     [SerializeField] private Slider visitedGreen;
     [SerializeField] private Slider visitedBlue;
-
-    public void Awake()
-    {
-        _instance = this;
-    }
 
     private void Update()
     {

@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class MazeGenerator : MonoBehaviour {
 
+    private MazeInput mazeInput;
     private IAlgorithm[] algorithms; 
     private IAlgorithm currentAlgorithm;
 
     public void Awake()
     {
+        mazeInput = GetComponent<MazeInput>();
         algorithms = GetComponents<IAlgorithm>();
     }
 
@@ -17,7 +19,7 @@ public class MazeGenerator : MonoBehaviour {
         if (currentAlgorithm != null)
             currentAlgorithm.End();
 
-        currentAlgorithm = algorithms[MazeInput.Instance.ChosenAlgorithm];
+        currentAlgorithm = algorithms[mazeInput.ChosenAlgorithm];
         currentAlgorithm.Begin();
     }
 }

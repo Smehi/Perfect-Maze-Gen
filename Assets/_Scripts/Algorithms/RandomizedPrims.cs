@@ -6,7 +6,9 @@ using UnityEngine;
 public class RandomizedPrims : MonoBehaviour, IAlgorithm
 {
     private float delay;
+    private MazeInput mazeInput;
     private MazeGridGenerator mazeGridGenerator;
+    private PlayerSpawner playerSpawner;
     private GameObject currentCell;
     private Dictionary<GameObject, Cell> cells = new Dictionary<GameObject, Cell>();
     private List<GameObject> walls = new List<GameObject>();
@@ -16,14 +18,18 @@ public class RandomizedPrims : MonoBehaviour, IAlgorithm
     {
         // Reset all the values
         delay = 0;
+        mazeInput = null;
         mazeGridGenerator = null;
+        playerSpawner = null;
         currentCell = null;
         cells = new Dictionary<GameObject, Cell>();
         walls = new List<GameObject>();
 
+        mazeInput = GetComponent<MazeInput>();
         mazeGridGenerator = GetComponent<MazeGridGenerator>();
+        playerSpawner = GetComponent<PlayerSpawner>();
 
-        delay = MazeInput.Instance.Delay;
+        delay = mazeInput.Delay;
         cells = mazeGridGenerator.MazeCells;
 
         foreach (KeyValuePair<GameObject, Cell> pair in cells)
@@ -160,6 +166,6 @@ public class RandomizedPrims : MonoBehaviour, IAlgorithm
         }
 
         // Spawn the player when the algorithm is done with the maze
-        mazeGridGenerator.SpawnPlayer();
+        playerSpawner.SpawnPlayer(mazeGridGenerator.CellWidth, mazeGridGenerator.CellHeight, mazeGridGenerator.MazeCells);
     }
 }

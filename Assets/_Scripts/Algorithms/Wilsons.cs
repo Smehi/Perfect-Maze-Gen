@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class Wilsons : MonoBehaviour, IAlgorithm
 {
     private float delay;
+    private MazeInput mazeInput;
     private MazeGridGenerator mazeGridGenerator;
+    private PlayerSpawner playerSpawner;
     private GameObject currentCell;
     private GameObject newStartCell;
     private Dictionary<GameObject, Direction> directedCells = new Dictionary<GameObject, Direction>();
@@ -27,16 +29,20 @@ public class Wilsons : MonoBehaviour, IAlgorithm
     {
         // Reset all the values
         delay = 0;
+        mazeInput = null;
         mazeGridGenerator = null;
+        playerSpawner = null;
         currentCell = null;
         newStartCell = null;
         directedCells = new Dictionary<GameObject, Direction>();
         remaining = new List<GameObject>();
         foundMaze = false;
 
+        mazeInput = GetComponent<MazeInput>();
         mazeGridGenerator = GetComponent<MazeGridGenerator>();
+        playerSpawner = GetComponent<PlayerSpawner>();
 
-        delay = MazeInput.Instance.Delay;
+        delay = mazeInput.Delay;
 
         foreach (KeyValuePair<GameObject, Cell> pair in mazeGridGenerator.MazeCells)
         {
@@ -96,7 +102,7 @@ public class Wilsons : MonoBehaviour, IAlgorithm
         }
 
         // Spawn the player when the algorithm is done with the maze
-        mazeGridGenerator.SpawnPlayer();
+        playerSpawner.SpawnPlayer(mazeGridGenerator.CellWidth, mazeGridGenerator.CellHeight, mazeGridGenerator.MazeCells);
     }
 
     private bool RandomWalk(GameObject cell)
