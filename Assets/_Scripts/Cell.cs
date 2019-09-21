@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+#pragma warning disable 0649
 public class Cell : MonoBehaviour
 {
     // This enum is here so removing walls can be done from other scripts

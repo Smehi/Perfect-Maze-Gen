@@ -15,9 +15,9 @@ public class MazeGenerator : MonoBehaviour {
 	public void GenerateMaze()
     {
         if (currentAlgorithm != null)
-            currentAlgorithm.Begin();
+            currentAlgorithm.End();
 
         currentAlgorithm = algorithms[MazeInput.Instance.ChosenAlgorithm];
-        currentAlgorithm.End();
+        currentAlgorithm.Begin();
     }
 }
