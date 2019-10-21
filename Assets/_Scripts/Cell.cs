@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+#pragma warning disable 0649
 public class Cell : MonoBehaviour
 {
     // This enum is here so removing walls can be done from other scripts
@@ -105,7 +106,6 @@ public class Cell : MonoBehaviour
         Cell right = GetIndex(Position.x + 1, Position.y) != -1 ? MazeCells.ElementAt(GetIndex(Position.x + 1, Position.y)).Value : null;
         Cell bottom = GetIndex(Position.x, Position.y - 1) != -1 ? MazeCells.ElementAt(GetIndex(Position.x, Position.y - 1)).Value : null;
         Cell left = GetIndex(Position.x - 1, Position.y) != -1 ? MazeCells.ElementAt(GetIndex(Position.x - 1, Position.y)).Value : null;
-
 
         // If the neighbours are available and not visited add them to our neighbours list
         if (top && !top.IsVisited)

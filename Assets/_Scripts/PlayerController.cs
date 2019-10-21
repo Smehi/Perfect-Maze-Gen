@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+#pragma warning disable 0649
 public class PlayerController : MonoBehaviour
 {
     [Range(0.15f, 0.3f)] [SerializeField] private float moveInterval;

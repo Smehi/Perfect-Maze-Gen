@@ -3,31 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackTracker : MonoBehaviour
+public class BackTracker : MonoBehaviour, IAlgorithm
 {
     private float delay;
-    private MazeManager mazeManager;
+    private MazeInput mazeInput;
+    private MazeGridGenerator mazeGridGenerator;
+    private PlayerSpawner playerSpawner;
     private GameObject currentCell;
     private Dictionary<GameObject, Cell> cells = new Dictionary<GameObject, Cell>();
     private List<GameObject> unVisited = new List<GameObject>();
     private List<GameObject> stack = new List<GameObject>();
     private IEnumerator currentSolve;
 
-    // Use this for initialization
-    public void Init()
+    public void Begin()
     {
         // Reset all the values
         delay = 0;
-        mazeManager = null;
+        mazeInput = null;
+        mazeGridGenerator = null;
+        playerSpawner = null;
         currentCell = null;
         cells = new Dictionary<GameObject, Cell>();
         unVisited = new List<GameObject>();
         stack = new List<GameObject>();
 
-        mazeManager = GetComponent<MazeManager>();
+        mazeInput = GetComponent<MazeInput>();
+        mazeGridGenerator = GetComponent<MazeGridGenerator>();
+        playerSpawner = GetComponent<PlayerSpawner>();
 
-        delay = mazeManager.Delay;
-        cells = mazeManager.MazeCells;
+        delay = mazeInput.Delay;
+        cells = mazeGridGenerator.MazeCells;
         
         foreach (KeyValuePair<GameObject, Cell> pair in cells)
         {
@@ -46,6 +51,11 @@ public class BackTracker : MonoBehaviour
 
         currentSolve = SolveMaze(delay);
         StartCoroutine(currentSolve);
+    }
+
+    public void End()
+    {
+        this.StopAllCoroutines();
     }
 
     private IEnumerator SolveMaze(float delay)
@@ -99,7 +109,7 @@ public class BackTracker : MonoBehaviour
         cells[currentCell].StopHighlightCell();
 
         // Spawn the player when the algorithm is done with the maze
-        mazeManager.SpawnPlayer();
+        playerSpawner.SpawnPlayer(mazeGridGenerator.CellWidth, mazeGridGenerator.CellHeight, mazeGridGenerator.MazeCells);
     }
 
     private void RemoveWalls(Cell cell1, Cell cell2)
