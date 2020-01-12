@@ -9,8 +9,7 @@ public class PlayerController : MonoBehaviour
     [Range(0.15f, 0.3f)] [SerializeField] private float moveInterval;
     private float nextMove = 0;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Time.time > nextMove)
         {
@@ -19,28 +18,24 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
             {
                 SetNewPosition(new Vector2(Position.x, Position.y + 1));
-                nextMove = Time.time + moveInterval;
                 return;
             }
 
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                 SetNewPosition(new Vector2(Position.x - 1, Position.y));
-                nextMove = Time.time + moveInterval;
                 return;
             }
 
             if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
             {
                 SetNewPosition(new Vector2(Position.x, Position.y - 1));
-                nextMove = Time.time + moveInterval;
                 return;
             }
 
             if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
                 SetNewPosition(new Vector2(Position.x + 1, Position.y));
-                nextMove = Time.time + moveInterval;
                 return;
             }
         }
@@ -100,6 +95,8 @@ public class PlayerController : MonoBehaviour
         {
             MazeManager.ShowMenu();
         }
+
+        nextMove = Time.time + moveInterval;
     }
 
     public MazeManager MazeManager

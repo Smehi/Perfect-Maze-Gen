@@ -6,7 +6,6 @@ using UnityEngine;
 public class BackTracker : MonoBehaviour, IAlgorithm
 {
     private float delay;
-    private MazeInput mazeInput;
     private MazeGridGenerator mazeGridGenerator;
     private PlayerSpawner playerSpawner;
     private GameObject currentCell;
@@ -19,7 +18,6 @@ public class BackTracker : MonoBehaviour, IAlgorithm
     {
         // Reset all the values
         delay = 0;
-        mazeInput = null;
         mazeGridGenerator = null;
         playerSpawner = null;
         currentCell = null;
@@ -27,11 +25,10 @@ public class BackTracker : MonoBehaviour, IAlgorithm
         unVisited = new List<GameObject>();
         stack = new List<GameObject>();
 
-        mazeInput = GetComponent<MazeInput>();
         mazeGridGenerator = GetComponent<MazeGridGenerator>();
         playerSpawner = GetComponent<PlayerSpawner>();
 
-        delay = mazeInput.Delay;
+        delay = MazeInput.Instance.Delay;
         cells = mazeGridGenerator.MazeCells;
         
         foreach (KeyValuePair<GameObject, Cell> pair in cells)

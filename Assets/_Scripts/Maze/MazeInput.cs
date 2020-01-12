@@ -6,6 +6,21 @@ using UnityEngine.UI;
 #pragma warning disable 0649
 public class MazeInput : MonoBehaviour
 {
+    #region Singleton
+    private static MazeInput instance;
+
+    public static MazeInput Instance
+    {
+        get
+        {
+            if (instance == null)
+                Debug.LogError("No instance of MazeInput has been found in the scene!");
+            
+            return instance;
+        }
+    }
+    #endregion
+
     [Header("Maze properties")]
     [SerializeField] private int mazeRows;
     [SerializeField] private int mazeColumns;
@@ -50,6 +65,11 @@ public class MazeInput : MonoBehaviour
     [SerializeField] private Slider visitedRed;
     [SerializeField] private Slider visitedGreen;
     [SerializeField] private Slider visitedBlue;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Update()
     {

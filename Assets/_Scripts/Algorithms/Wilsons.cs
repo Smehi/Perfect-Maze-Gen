@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Wilsons : MonoBehaviour, IAlgorithm
 {
     private float delay;
-    private MazeInput mazeInput;
     private MazeGridGenerator mazeGridGenerator;
     private PlayerSpawner playerSpawner;
     private GameObject currentCell;
@@ -29,7 +28,6 @@ public class Wilsons : MonoBehaviour, IAlgorithm
     {
         // Reset all the values
         delay = 0;
-        mazeInput = null;
         mazeGridGenerator = null;
         playerSpawner = null;
         currentCell = null;
@@ -38,11 +36,10 @@ public class Wilsons : MonoBehaviour, IAlgorithm
         remaining = new List<GameObject>();
         foundMaze = false;
 
-        mazeInput = GetComponent<MazeInput>();
         mazeGridGenerator = GetComponent<MazeGridGenerator>();
         playerSpawner = GetComponent<PlayerSpawner>();
 
-        delay = mazeInput.Delay;
+        delay = MazeInput.Instance.Delay;
 
         foreach (KeyValuePair<GameObject, Cell> pair in mazeGridGenerator.MazeCells)
         {

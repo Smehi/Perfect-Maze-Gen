@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviour
 {
-    private MazeInput mazeInput;
     private MazeManager mazeManager;
     private GameObject player;
 
     private void Awake()
     {
-        mazeInput = GetComponent<MazeInput>();
         mazeManager = GetComponent<MazeManager>();
     }
 
@@ -23,22 +21,22 @@ public class PlayerSpawner : MonoBehaviour
         }
 
         // Make the player
-        player = Instantiate(mazeInput.PlayerPrefab);
+        player = Instantiate(MazeInput.Instance.PlayerPrefab);
 
         // Set the parent for the same reasons as the cell
-        player.transform.SetParent(mazeInput.MazeCanvas.transform);
+        player.transform.SetParent(MazeInput.Instance.MazeCanvas.transform);
 
         // Put the player in the top left cell
-        player.transform.position = new Vector2(0 * cellWidth + (cellWidth / 2), (mazeInput.MazeRows - 1) * cellHeight + (cellHeight / 2));
+        player.transform.position = new Vector2(0 * cellWidth + (cellWidth / 2), (MazeInput.Instance.MazeRows - 1) * cellHeight + (cellHeight / 2));
         player.transform.localScale = new Vector2(cellWidth, cellHeight);
         player.name = "Player";
 
         // Set all the needed information 
         PlayerController pc = player.GetComponent<PlayerController>();
         pc.MazeManager = mazeManager;
-        pc.Position = new Vector2(0, mazeInput.MazeRows - 1);
-        pc.Rows = mazeInput.MazeRows;
-        pc.Columns = mazeInput.MazeColumns;
+        pc.Position = new Vector2(0, MazeInput.Instance.MazeRows - 1);
+        pc.Rows = MazeInput.Instance.MazeRows;
+        pc.Columns = MazeInput.Instance.MazeColumns;
         pc.Width = cellWidth;
         pc.Height = cellHeight;
         pc.MazeCells = mazeCells;
